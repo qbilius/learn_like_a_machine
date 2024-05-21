@@ -11,6 +11,7 @@ import matplotlib.patches
 from ipywidgets import interact, Checkbox, IntSlider, SelectionSlider
 
 
+plt.rcParams['figure.dpi'] = 300
 COLOR1 = 'firebrick'
 COLOR2 = 'olivedrab'
 
@@ -68,12 +69,10 @@ class2 = matplotlib.colors.ListedColormap(['white', COLOR2])
 def plot_barcode(index):
     """Adapted from matplotlib examples"""
 
-    pixel_per_bar = 4
-    dpi = 100
     i = index // 2
     code = codes[i]
-    fig = plt.figure(figsize=(len(code) * pixel_per_bar / dpi, 2), dpi=dpi)
-    ax = fig.add_axes([0, 0, 1, 1])  # span the whole figure
+    fig = plt.figure()
+    ax = fig.add_subplot(111, aspect=2)
     ax.set_axis_off()
 
     if index % 2:
@@ -154,8 +153,8 @@ def learn_barcode(step, lr):
     Display barcodes
     """
     y_preds, boundaries = data[lr]
-    pixel_per_bar = 4
-    dpi = 100
+    pixel_per_bar = 8
+    dpi = 200
     i = step // 4
     code = codes[i]
     fig, (ax1, ax2) = plt.subplots(
